@@ -1,6 +1,7 @@
 module Human.List where
 
 open import Human.Nat
+open import Human.Bool
 
 infixr 5 _,_
 data List {a} (A : Set a) : Set a where
@@ -25,6 +26,12 @@ length = foldr (λ a n → suc n) zero
 map : ∀ {A : Set} {B : Set} → (f : A → B) → List A → List B
 map f end      = end
 map f (x , xs) = (f x) , (map f xs) -- f transforms element x, return map to do a new transformation
+
+filter : {A : Set} → (A → Bool) → List A → List A
+filter p end     = end
+filter p (x , l) with p x
+... | true  = x , (filter p l)
+... | false = filter p l
 
 -- Sum all numbers in a list
 sum : List Nat → Nat

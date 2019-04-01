@@ -45,6 +45,12 @@ suc n < suc m = n < m
 
 {-# BUILTIN NATLESS _<_ #-}
 
+_>_ : Nat → Nat → Bool
+zero  > zero  = false
+_     > zero  = true
+zero  > suc _ = false
+suc n > suc m = n > m
+
 div-helper : (k m n j : Nat) → Nat
 div-helper k m  zero    j      = k
 div-helper k m (suc n)  zero   = div-helper (suc k) m n m
@@ -54,7 +60,7 @@ div-helper k m (suc n) (suc j) = div-helper k       m n j
 
 mod-helper : (k m n j : Nat) → Nat
 mod-helper k m  zero    j      = k
-mod-helper k m (suc n)  zero   = mod-helper 0       m n m
+mod-helper k m (suc n )  zero   = mod-helper 0       m n m
 mod-helper k m (suc n) (suc j) = mod-helper (suc k) m n j
 
 {-# BUILTIN NATMODSUCAUX mod-helper #-}

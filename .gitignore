@@ -1,3 +1,4 @@
 *.agdai
 node_modules
 .DS_Store
+test.agda
