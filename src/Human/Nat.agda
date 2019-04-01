@@ -58,3 +58,13 @@ mod-helper k m (suc n)  zero   = mod-helper 0       m n m
 mod-helper k m (suc n) (suc j) = mod-helper (suc k) m n j
 
 {-# BUILTIN NATMODSUCAUX mod-helper #-}
+
+min : Nat → Nat → Nat
+min x y with x < y
+... | true  = x
+... | false = y
+
+max : Nat → Nat → Nat
+max x y with x < y
+... | true  = y
+... | false = x
